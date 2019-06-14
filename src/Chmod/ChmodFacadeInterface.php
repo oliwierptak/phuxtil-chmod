@@ -8,12 +8,33 @@ interface ChmodFacadeInterface
 
     /**
      * @param string $octal Octal values, eg. 0644, 0755
+     *
+     * @return bool
+     */
+    public function isReadable(string $octal): bool;
+
+    /**
+     * @param string $octal Octal values, eg. 0644, 0755
+     *
+     * @return bool
+     */
+    public function isWritable(string $octal): bool;
+
+    /**
+     * @param string $octal Octal values, eg. 0644, 0755
+     *
+     * @return bool
+     */
+    public function isExecutable(string $octal): bool;
+
+    /**
+     * @param string $octal Octal values, eg. 0644, 0755
      * @param string $owner u|g|o
      * @param string $access r|w|x
      *
      * @return bool
      */
-    public function validateByOctal(string $octal, string $owner, string $access): bool;
+    public function validate(string $octal, string $owner, string $access): bool;
 
     /**
      * @param string $symbol eg. -rw-r--r--

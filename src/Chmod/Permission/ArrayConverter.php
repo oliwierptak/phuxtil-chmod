@@ -41,7 +41,7 @@ class ArrayConverter
         $flags = [];
         foreach ($this->symbolicModes as $owner => $permissions) {
             foreach ($permissions as $access => $octalValue) {
-                $flags[$owner][$access] = $this->validator->validateByOctal($octal, $owner, $access) ? $access : '-';
+                $flags[$owner][$access] = $this->validator->validate($octal, $owner, $access) ? $access : '-';
             }
         }
 

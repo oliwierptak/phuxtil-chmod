@@ -22,12 +22,48 @@ class Validator
 
     /**
      * @param string $octal Octal values, eg. 0644, 0755
+     *
+     * @return bool
+     */
+    public function isReadable(string $octal): bool
+    {
+        return $this->validate($octal, 'u', 'r') ||
+            $this->validate($octal, 'g', 'r') ||
+            $this->validate($octal, 'o', 'r');
+    }
+
+    /**
+     * @param string $octal Octal values, eg. 0644, 0755
+     *
+     * @return bool
+     */
+    public function isWritable(string $octal): bool
+    {
+        return $this->validate($octal, 'u', 'w') ||
+            $this->validate($octal, 'g', 'w') ||
+            $this->validate($octal, 'o', 'w');
+    }
+
+    /**
+     * @param string $octal Octal values, eg. 0644, 0755
+     *
+     * @return bool
+     */
+    public function isExecutable(string $octal): bool
+    {
+        return $this->validate($octal, 'u', 'x') ||
+            $this->validate($octal, 'g', 'x') ||
+            $this->validate($octal, 'o', 'x');
+    }
+
+    /**
+     * @param string $octal Octal values, eg. 0644, 0755
      * @param string $owner u|g|o
      * @param string $access r|w|x
      *
      * @return bool
      */
-    public function validateByOctal(string $octal, string $owner, string $access): bool
+    public function validate(string $octal, string $owner, string $access): bool
     {
         if (!isset($this->symbolicModes[$owner]) || !isset($this->symbolicModes[$owner][$access])) {
             return false;
@@ -69,6 +105,6 @@ class Validator
             $otherMode
         );
 
-        return $this->validateByOctal($octal, $owner, $access);
+        return $this->validate($octal, $owner, $access);
     }
 }

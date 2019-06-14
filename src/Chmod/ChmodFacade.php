@@ -23,11 +23,32 @@ class ChmodFacade implements ChmodFacadeInterface
         $this->factory = $factory;
     }
 
-    public function validateByOctal(string $octal, string $owner, string $access): bool
+    public function isReadable(string $octal): bool
     {
         return $this->getFactory()
             ->createPermissionValidator()
-            ->validateByOctal($octal, $owner, $access);
+            ->isReadable($octal);
+    }
+
+    public function isWritable(string $octal): bool
+    {
+        return $this->getFactory()
+            ->createPermissionValidator()
+            ->isWritable($octal);
+    }
+
+    public function isExecutable(string $octal): bool
+    {
+        return $this->getFactory()
+            ->createPermissionValidator()
+            ->isExecutable($octal);
+    }
+
+    public function validate(string $octal, string $owner, string $access): bool
+    {
+        return $this->getFactory()
+            ->createPermissionValidator()
+            ->validate($octal, $owner, $access);
     }
 
     public function validateBySymbol(string $symbol, string $owner, string $access): bool

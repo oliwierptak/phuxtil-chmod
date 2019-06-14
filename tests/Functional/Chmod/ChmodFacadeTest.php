@@ -8,34 +8,67 @@ use Phuxtil\Chmod\ChmodFactory;
 
 class ChmodFacadeTest extends TestCase
 {
-    public function test_validateByOctal()
+    public function test_isReadable()
+    {
+        $facade = new ChmodFacade();
+
+        $this->assertTrue($facade->isReadable('0644'));
+        $this->assertTrue($facade->isReadable('0343'));
+        $this->assertTrue($facade->isReadable('0334'));
+        $this->assertFalse($facade->isReadable('0333'));
+    }
+
+    public function test_isWritable()
+    {
+        $facade = new ChmodFacade();
+
+        $this->assertTrue($facade->isWritable('0644'));
+        $this->assertTrue($facade->isWritable('0343'));
+        $this->assertTrue($facade->isWritable('0334'));
+        $this->assertTrue($facade->isWritable('0222'));
+        $this->assertFalse($facade->isWritable('0111'));
+    }
+
+    public function test_isExecutable()
+    {
+        $facade = new ChmodFacade();
+
+        $this->assertFalse($facade->isExecutable('0644'));
+        $this->assertTrue($facade->isExecutable('0343'));
+        $this->assertTrue($facade->isExecutable('0334'));
+        $this->assertFalse($facade->isExecutable('0222'));
+        $this->assertTrue($facade->isExecutable('0111'));
+        $this->assertFalse($facade->isExecutable('0000'));
+    }
+
+    public function test_validate()
     {
         $facade = new ChmodFacade();
         $facade->setFactory(new ChmodFactory());
 
-        $this->assertTrue($facade->validateByOctal('0644', 'u', 'r'));
-        $this->assertTrue($facade->validateByOctal('0644', 'g', 'r'));
-        $this->assertFalse($facade->validateByOctal('0644', 'g', 'w'));
-        $this->assertFalse($facade->validateByOctal('0644', 'o', 'w'));
+        $this->assertTrue($facade->validate('0644', 'u', 'r'));
+        $this->assertTrue($facade->validate('0644', 'g', 'r'));
+        $this->assertFalse($facade->validate('0644', 'g', 'w'));
+        $this->assertFalse($facade->validate('0644', 'o', 'w'));
 
-        $this->assertTrue($facade->validateByOctal('0755', 'u', 'r'));
-        $this->assertTrue($facade->validateByOctal('0755', 'g', 'r'));
-        $this->assertFalse($facade->validateByOctal('0755', 'g', 'w'));
-        $this->assertFalse($facade->validateByOctal('0755', 'o', 'w'));
+        $this->assertTrue($facade->validate('0755', 'u', 'r'));
+        $this->assertTrue($facade->validate('0755', 'g', 'r'));
+        $this->assertFalse($facade->validate('0755', 'g', 'w'));
+        $this->assertFalse($facade->validate('0755', 'o', 'w'));
     }
 
     public function test_validateByOctal_should_return_false_when_invalid_octal()
     {
         $facade = new ChmodFacade();
 
-        $this->assertFalse($facade->validateByOctal('invalid', 'u', 'r'));
+        $this->assertFalse($facade->validate('invalid', 'u', 'r'));
     }
 
     public function test_validateByOctal_should_return_false_when_invalid_owner_or_access()
     {
         $facade = new ChmodFacade();
 
-        $this->assertFalse($facade->validateByOctal('0664', 'invalid', 'invalid'));
+        $this->assertFalse($facade->validate('0664', 'invalid', 'invalid'));
     }
 
     public function test_validateBySymbol()
