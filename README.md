@@ -1,7 +1,7 @@
 # phuxtil-chmod
 
 
-Library to validate symbolic and octal modes used by unix `chmod` program.
+Eeasy way to validate symbolic and octal modes used by unix `chmod` program.
 
 > In Unix and Unix-like operating systems, chmod is the command and system call which is used to change the access permissions of file system objects. It is also used to change special mode flags.
 
@@ -19,6 +19,31 @@ Create new instance:
 
 ```php
 $facade = new ChmodFacade();
+```
+
+
+##### isReadable(...)
+
+```php
+$facade->isReadable('0755');     # true
+$facade->isReadable('0334');     # true
+$facade->isReadable('0333');     # false
+```
+
+##### isWritable(...)
+
+```php
+$facade->isWritable('0644');     # true
+$facade->isWritable('0222');     # true
+$facade->isWritable('0111');     # false
+```
+
+##### isExecutable(...)
+
+```php
+$facade->isExecutable('0755');     # true
+$facade->isExecutable('0644');     # false
+$facade->isExecutable('0222');     # false
 ```
 
 
