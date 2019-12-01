@@ -11,6 +11,8 @@ Eeasy way to validate symbolic and octal modes used by unix `chmod` program.
 composer require phuxtil/chmod
 ```
 
+_Note_: Use v1.x for compatibility with PHP v7.0.x
+
 ### Usage
 
 #### Facade
