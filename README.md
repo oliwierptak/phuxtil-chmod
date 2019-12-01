@@ -1,7 +1,7 @@
 # phuxtil-chmod
 
 
-Eeasy way to validate symbolic and octal modes used by unix `chmod` program.
+Easy way to validate symbolic and octal modes used by unix `chmod` program.
 
 > In Unix and Unix-like operating systems, chmod is the command and system call which is used to change the access permissions of file system objects. It is also used to change special mode flags.
 
