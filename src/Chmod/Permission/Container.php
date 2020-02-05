@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Phuxtil\Chmod\Permission;
 
 use Phuxtil\Chmod\DefinesInterface;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Phuxtil\Chmod;
 
 class ChmodFacade implements ChmodFacadeInterface

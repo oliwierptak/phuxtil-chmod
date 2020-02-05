@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace PhuxtilTests\Functional\Chmod;
 
 use PHPUnit\Framework\TestCase;
