@@ -71,6 +71,10 @@ class Validator
             return false;
         }
 
+        if (!ctype_xdigit($octal)) {
+            return false;
+        }
+
         $perms = octdec($octal);
         if ($perms <= 0) {
             return false;

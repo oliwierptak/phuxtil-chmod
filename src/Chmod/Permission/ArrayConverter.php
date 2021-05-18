@@ -35,6 +35,10 @@ class ArrayConverter
      */
     public function toArray(string $octal): array
     {
+        if (!ctype_xdigit($octal)) {
+            return [];
+        }
+
         $perms = octdec($octal);
         if ($perms <= 0) {
             return [];
